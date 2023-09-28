@@ -4,7 +4,7 @@ function createResult(resultData) {
     location: resultData.competitionLocation,
     compName: resultData.competitionName,
     placement: resultData.competitionPlacement,
-    date: resultData.date,
+    date: new Date(resultData.date),
     discipline: resultData.discipline,
     memberId: resultData.memberId,
     type: resultData.resultType,
@@ -15,21 +15,8 @@ function createResult(resultData) {
     isCompetition() {
       return this.type === "competition";
     },
-    isBackStroke() {
-      return this.discipline === "backstroke";
-    },
-    isButterfly() {
-      return this.discipline === "butterfly";
-    },
-    isCrawl() {
-      return this.discipline === "crawl";
-    },
-    isBreastStroke() {
-      return this.discipline === "breaststroke";
-    },
-    isFreeStyle() {
-      return this.discipline === "freestyle";
-    },
+    setTimeAsString() {},
+    getTimeAsString() {},
   };
 
   return Result;

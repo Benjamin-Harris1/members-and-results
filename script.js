@@ -7,7 +7,7 @@ window.addEventListener("load", initApp);
 async function initApp() {
   initTabs();
   await buildMembersList();
-  // TODO: Make the rest of the program ...
+
   showMembers(memberArray);
 
   await buildResultList();
@@ -69,32 +69,28 @@ function showResults() {
   resultArray.sort((a, b) => a.time.localeCompare(b.time));
   for (const result of resultArray) {
     let resultTypeText;
-    let resultDisciplineText;
 
-    if (result.isTraining() === true) {
+    if (result.isTraining()) {
       resultTypeText = "Træning";
-    } else if (result.isCompetition() === true) {
+    } else if (result.isCompetition()) {
       resultTypeText = "Konkurrence";
     }
 
-    if (result.isBackStroke() === true) {
-      resultDisciplineText = "ryg";
-    } else if (result.isButterfly() === true) {
-      resultDisciplineText = "butterfly";
-    } else if (result.isCrawl() === true) {
-      resultDisciplineText = "crawl";
-    } else if (result.isBreastStroke() === true) {
-      resultDisciplineText = "bryst";
-    } else if (result.isFreeStyle() === true) {
-      resultDisciplineText = "freestyle";
-    }
+    const discipline = {
+      backstroke: "ryg",
+      butterfly: "butterfly",
+      crawl: "crawl",
+      breaststroke: "bryst",
+      freestyle: "freestyle",
+    };
+
     const html =
       /*html*/
       `
             <tr>
-            <td>${result.date}</td>
+            <td>${result.date.toLocaleString("da", { weekday: "short", month: "short", day: "numeric" })}</td>
             <td>${result.memberId}</td>
-            <td>${resultDisciplineText}</td>
+            <td>${discipline[result.discipline]}</td>
             <td>${resultTypeText}</td>
             <td>${result.time}</td>
             </tr>
