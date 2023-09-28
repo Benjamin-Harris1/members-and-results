@@ -1,6 +1,7 @@
 import { initTabs } from "./tabs.js";
 import { createResult } from "./result.js";
 import { constructMember } from "./member.js";
+import { constructListRenderer } from "./renderers/listrenderer.js";
 
 window.addEventListener("load", initApp);
 
@@ -8,7 +9,8 @@ async function initApp() {
   initTabs();
   await buildMembersList();
 
-  showMembers(memberArray);
+  const memberList = constructListRenderer(memberArray);
+  memberList.render();
 
   await buildResultList();
   showResults(resultArray);
@@ -29,22 +31,6 @@ async function getMembers() {
   const response = await fetch("/data/members.json");
   const data = await response.json();
   return data;
-}
-
-function showMembers(memberArray) {
-  document.querySelector("table#members tbody").innerHTML = "";
-  for (const member of memberArray) {
-    const html = /*HTML*/ `
-    <tr>
-      <td>${member.getFullName()}</td>
-      <td>${member.isActive()}</td>
-      <td>${member.birthday}</td>
-      <td>${member.getAge()}</td>
-      <td>${member.isJuniorSenior()}</td>
-    </tr>
-    `;
-    document.querySelector("table#members tbody").insertAdjacentHTML("beforeend", html);
-  }
 }
 
 const resultArray = [];
