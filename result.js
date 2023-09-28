@@ -1,4 +1,4 @@
-function createResult(resultData) {
+function createResult(resultData, members) {
   const Result = {
     id: resultData.id,
     location: resultData.competitionLocation,

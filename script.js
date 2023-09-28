@@ -13,6 +13,10 @@ async function initApp() {
   memberList.render();
 
   await buildResultList();
+
+  for (const result of resultArray) {
+    result.member = memberArray.find((member) => member.id === result.memberId);
+  }
   showResults(resultArray);
 }
 
@@ -70,12 +74,14 @@ function showResults() {
       freestyle: "freestyle",
     };
 
+    const memberInfo = result.member ? `${result.member.getFullName()}` : "Ukendt medlem";
+
     const html =
       /*html*/
       `
             <tr>
             <td>${result.date.toLocaleString("da", { weekday: "short", month: "short", day: "numeric" })}</td>
-            <td>${result.memberId}</td>
+            <td>${memberInfo}</td>
             <td>${discipline[result.discipline]}</td>
             <td>${resultTypeText}</td>
             <td>${result.time}</td>

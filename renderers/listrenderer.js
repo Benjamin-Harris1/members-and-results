@@ -1,4 +1,5 @@
 import { MemberRenderer } from "./memberrenderer.js";
+import { ResultRenderer } from "./resultrenderer.js";
 
 function constructListRenderer(list) {
   const ListRenderer = {
